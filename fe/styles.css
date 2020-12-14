@@ -43,7 +43,8 @@ button {
 }
 
 .product-container {
-    margin: 15px;
+    border-radius: 20px;
+    margin: 10px;
     padding: 2px 16px;
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
@@ -61,6 +62,10 @@ button {
 .product-container h1 {
     margin-bottom: 10px;
     margin-left: 15px;
+}
+
+.product-container h3 {
+    text-align: center;
 }
 
 .button-add {
