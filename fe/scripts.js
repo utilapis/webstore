@@ -16,13 +16,25 @@ function add(productId, price) {
 
 async function pay() {
     try{
-        const productList = await (await fetch("/api/pay",{
+        const preference = await (await fetch("/api/pay",{
             method: "post",
             body: JSON.stringify(carrito),
             headers: {
                 "Content-Type": "application/json"
             }
         })).json();
+
+
+        var script = document.createElement("script");
+  
+        // The source domain must be completed according to the site for which you are integrating.
+        // For example: for Argentina ".com.ar" or for Brazil ".com.br".
+        script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+        script.type = "text/javascript";
+        script.dataset.preferenceId = preference.preferenceId;
+        document.getElementById("page-content").innerHTML = "";
+        document.querySelector("#page-content").appendChild(script);
+
     }
     catch {
         window.alert("Sin stock");
@@ -30,7 +42,7 @@ async function pay() {
 
     carrito = [];
     total = 0;
-    await fetchProducts();
+    //await fetchProducts();
     document.getElementById("checkout").innerHTML = `Pagar $${total}`
 }
 
