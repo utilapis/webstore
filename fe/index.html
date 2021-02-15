@@ -7,9 +7,36 @@
 <body>
     <div class="page-nav">
         <h1>Mi tienda</h1>
-        <button id="checkout" class="button-checkout" onclick="pay()">Pagar</button>
+        <button id="checkout" class="button-checkout" onclick="showOrder()">Carrito</button>
     </div>
     <div id="page-content" class="page-content">
         
+        <div id="product-cards" class="product-cards"></div>
+
+        <div id="order" class="order">
+            <h1>Orden</h1>
+            <h2 id="order-total">Total: $150</h2>
+            <table id="order-table" class="order-table">
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Detalle</th>
+                  <th>Subtotal</th>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Pesas</td>
+                  <td>50</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Banco ajustable</td>
+                  <td>100</td>
+                </tr>
+            </table>
+            <div id="order-actions" class="order-actions">
+                <p onclick="displayProducts()"><< volver</p>
+                <p onclick="pay()">confirmar >></p>
+            </div>
+        </div>
     </div>
 </body>
