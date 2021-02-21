@@ -28,3 +28,7 @@ Aprende a programar creando tu tienda online.
 ## 7 - Muestra la orden de compras de tu tienda online usando HTML, CSS y Javascript. | UtilAPIs
 - Video: https://youtu.be/i7IS5cUthDo
 - Código: https://github.com/utilapis/webstore/tree/feature/07-MuestraLaOrdenDeComprasDeTuTiendaOnline
+
+## 8 - Muestra el formulario de envío de tu tienda online usando HTML, CSS y Javascript. | UtilAPIs
+- Video: https://youtu.be/4H6Ls_K-n5g
+- Código: https://github.com/utilapis/webstore/tree/feature/08-MuestraElFormularioDeEnvioDeTuTiendaOnline
