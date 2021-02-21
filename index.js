@@ -18,7 +18,8 @@ app.get("/api/products", async (req, res) => {
 });
 
 app.post("/api/pay", async (req, res) => {
-  const ids = req.body;
+  const order = req.body;
+  const ids = order.items.map((p) => p.id);
   const productsCopy = await repository.read();
 
   let preference = {
@@ -56,12 +57,12 @@ app.post("/api/pay", async (req, res) => {
   }
 });
 
-app.get('/feedback', function(request, response) {
+app.get("/feedback", function (request, response) {
   response.json({
-   Payment: request.query.payment_id,
-   Status: request.query.status,
-   MerchantOrder: request.query.merchant_order_id
- })
+    Payment: request.query.payment_id,
+    Status: request.query.status,
+    MerchantOrder: request.query.merchant_order_id,
+  });
 });
 
 app.use("/", express.static("fe"));
