@@ -24,3 +24,7 @@ Aprende a programar creando tu tienda online.
 ## 6 - Agrega un método de pagos a tu tienda online usando Mercado Pago. | UtilAPIs
 - Video: https://youtu.be/zx6YzaIwEl8
 - Código: https://github.com/utilapis/webstore/tree/feature/06-AgregaUnMetodoDePagosATuTiendaOnline
+
+## 6.1 - Agrega un método de pagos a tu tienda online usando Stripe. | UtilAPIs
+- Video: https://youtu.be/4RhZWJ-uEL4
+- Código: https://github.com/utilapis/webstore/tree/feature/06.1-AgregaUnMetodoDePagosATuTiendaOnlineUsandoStripe

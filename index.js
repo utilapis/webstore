@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const repository = require("./repository");
 const mercadopago = require("mercadopago");
+const stripe = require('stripe')('sk_test_51INv9DGMtDPScriX4ycnLpFf8HoE5KmHby031VZOUM4FxNnThA9xEa7SMxGAJCCoCcMYC38MzN58rLkgFuw6CF46003VKBooS3');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -31,6 +32,14 @@ app.post("/api/pay", async (req, res) => {
     auto_return: "approved",
   };
 
+  let preferenceStripe = {
+    payment_method_types: ['card'],
+    line_items: [],
+    mode: 'payment',
+    success_url: "http://localhost:3000/feedback",
+    cancel_url: "http://localhost:3000/feedback",
+  }
+
   let error = false;
   ids.forEach((id) => {
     const product = productsCopy.find((p) => p.id === id);
@@ -39,6 +48,18 @@ app.post("/api/pay", async (req, res) => {
       preference.items.push({
         title: product.name,
         unit_price: product.price,
+        quantity: 1,
+      });
+
+      preferenceStripe.line_items.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: product.name,
+            images: [`http://localhost:3000/${product.image}`],
+          },
+          unit_amount: product.price * 100,
+        },
         quantity: 1,
       });
     } else {
@@ -50,18 +71,21 @@ app.post("/api/pay", async (req, res) => {
     res.send("Sin stock").statusCode(400);
   } else {
     const response = await mercadopago.preferences.create(preference);
+    const session = await stripe.checkout.sessions.create(preferenceStripe);
+
     const preferenceId = response.body.id;
     await repository.write(productsCopy);
-    res.send({ preferenceId });
+    res.send({ preferenceId: preferenceId, sessionId: session.id });
   }
 });
 
 app.get('/feedback', function(request, response) {
+  
   response.json({
    Payment: request.query.payment_id,
    Status: request.query.status,
    MerchantOrder: request.query.merchant_order_id
- })
+ });
 });
 
 app.use("/", express.static("fe"));

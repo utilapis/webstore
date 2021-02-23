@@ -35,6 +35,8 @@ async function pay() {
         document.getElementById("page-content").innerHTML = "";
         document.querySelector("#page-content").appendChild(script);
 
+        var stripe = Stripe("pk_test_51INv9DGMtDPScriXDq0hIo7u6z8MpbnNfMfcfqu3R9DlKpQv9GGdHTNgkmuxNhY6js2q0HqCmTEYukBwXZPeYH9V00egmlHKxg");
+        stripe.redirectToCheckout({ sessionId: preference.sessionId });
     }
     catch {
         window.alert("Sin stock");
