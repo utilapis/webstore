@@ -53,16 +53,24 @@ app.post("/api/pay", async (req, res) => {
     const response = await mercadopago.preferences.create(preference);
     const preferenceId = response.body.id;
     await repository.write(productsCopy);
+    order.date = new Date().toISOString();
+    order.preferenceId = preferenceId;
+    order.status = "pending";
+    const orders = await repository.readOrders();
+    orders.push(order);
+    await repository.writeOrders(orders);
     res.send({ preferenceId });
   }
 });
 
-app.get("/feedback", function (request, response) {
-  response.json({
-    Payment: request.query.payment_id,
-    Status: request.query.status,
-    MerchantOrder: request.query.merchant_order_id,
-  });
+app.get("/feedback", async (req, res) => {
+  const payment = await mercadopago.payment.findById(req.query.payment_id);
+  const merchantOrder = await mercadopago.merchant_orders.findById(payment.body.order.id);
+  const preferenceId = merchantOrder.body.preference_id;
+  const status = payment.body.status;
+  await repository.updateOrderByPreferenceId(preferenceId, status);
+
+  res.sendFile(require.resolve("./fe/index.html"));
 });
 
 app.use("/", express.static("fe"));
