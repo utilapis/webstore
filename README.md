@@ -32,3 +32,7 @@ Aprende a programar creando tu tienda online.
 ## 8 - Muestra el formulario de envío de tu tienda online usando HTML, CSS y Javascript. | UtilAPIs
 - Video: https://youtu.be/4H6Ls_K-n5g
 - Código: https://github.com/utilapis/webstore/tree/feature/08-MuestraElFormularioDeEnvioDeTuTiendaOnline
+
+## 9 - Guarda la orden de compras de tu tienda online usando Google Sheet. | UtilAPIs
+- Video: https://youtu.be/NOIqly3sJmw
+- Código: https://github.com/utilapis/webstore/tree/feature/09-GuardaLaOrdenDeComprasDeTuTiendaOnline
