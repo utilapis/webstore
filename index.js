@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const repository = require("./repository");
 const mercadopago = require("mercadopago");
 const app = express();
@@ -10,8 +9,7 @@ mercadopago.configure({
     "TEST-8840939573547467-020707-248077b0607d89f9d2b67ee11a4f9e27-705632138",
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/api/products", async (req, res) => {
   res.send(await repository.read());

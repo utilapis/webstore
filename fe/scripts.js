@@ -19,7 +19,7 @@ function add(productId, price) {
 }
 
 async function showOrder() {
-  document.getElementById("product-cards").style.display = "none";
+  document.getElementById("all-products").style.display = "none";
   document.getElementById("order").style.display = "block";
 
   document.getElementById("order-total").innerHTML = `$${total}`;
@@ -100,11 +100,22 @@ async function pay() {
 
 //-----
 function displayProducts() {
-  document.getElementById("product-cards").style.display = "flex";
+  document.getElementById("all-products").style.display = "block";
   document.getElementById("order").style.display = "none";
 
+  const gym = productList.filter((p) => p.category === "gym");
+  displayProductsByType(gym, "product-cards-gym");
+
+  const car = productList.filter((p) => p.category === "car");
+  displayProductsByType(car, "product-cards-car");
+
+  const pc = productList.filter((p) => p.category === "pc");
+  displayProductsByType(pc, "product-cards-pc");
+}
+
+function displayProductsByType(productsByType, tagId) {
   let productsHTML = "";
-  productList.forEach((p) => {
+  productsByType.forEach((p) => {
     let buttonHTML = `<button class="button-add" onclick="add(${p.id}, ${p.price})">Agregar</button>`;
 
     if (p.stock <= 0) {
@@ -118,7 +129,7 @@ function displayProducts() {
             ${buttonHTML}
         </div>`;
   });
-  document.getElementById("product-cards").innerHTML = productsHTML;
+  document.getElementById(tagId).innerHTML = productsHTML;
 }
 
 async function fetchProducts() {

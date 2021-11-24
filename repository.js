@@ -21,7 +21,7 @@ const sheets = google.sheets({ version: "v4", auth: oAuth2Client });
 async function read() {
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: "1fO4WiyE2EP9AVT8qRLGbGrcdNPYxCAXiTBXwz3IafcM",
-    range: "Products!A2:E",
+    range: "Products!A2:F",
   });
 
   const rows = response.data.values;
@@ -31,20 +31,21 @@ async function read() {
     price: +row[2],
     image: row[3],
     stock: +row[4],
+    category: row[5],
   }));
 
   return products;
 }
 
 async function write(products) {
-  let values = products.map((p) => [p.id, p.name, p.price, p.image, p.stock]);
+  let values = products.map((p) => [p.id, p.name, p.price, p.image, p.stock, p.category]);
 
   const resource = {
     values,
   };
   const result = await sheets.spreadsheets.values.update({
     spreadsheetId: "1fO4WiyE2EP9AVT8qRLGbGrcdNPYxCAXiTBXwz3IafcM",
-    range: "Products!A2:E",
+    range: "Products!A2:F",
     valueInputOption: "RAW",
     resource,
   });
@@ -78,7 +79,7 @@ async function readOrders() {
     range: "Orders!A2:G",
   });
 
-  const rows = response.data.values;
+  const rows = response.data.values || [];
   const orders = rows.map((row) => ({
     date: row[0],
     preferenceId: row[1],
