@@ -48,6 +48,12 @@ button {
     justify-content: space-evenly;
 }
 
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .product-container {
     border-radius: 20px;
     margin: 10px;

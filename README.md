@@ -25,6 +25,10 @@ Aprende a programar creando tu tienda online.
 - Video: https://youtu.be/zx6YzaIwEl8
 - Código: https://github.com/utilapis/webstore/tree/feature/06-AgregaUnMetodoDePagosATuTiendaOnline
 
+## 6.1 - Agrega un método de pagos a tu tienda online usando Stripe. | UtilAPIs
+- Video: https://youtu.be/4RhZWJ-uEL4
+- Código: https://github.com/utilapis/webstore/tree/feature/06.1-AgregaUnMetodoDePagosATuTiendaOnlineUsandoStripe
+
 ## 7 - Muestra la orden de compras de tu tienda online usando HTML, CSS y Javascript. | UtilAPIs
 - Video: https://youtu.be/i7IS5cUthDo
 - Código: https://github.com/utilapis/webstore/tree/feature/07-MuestraLaOrdenDeComprasDeTuTiendaOnline
@@ -36,3 +40,7 @@ Aprende a programar creando tu tienda online.
 ## 9 - Guarda la orden de compras de tu tienda online usando Google Sheet. | UtilAPIs
 - Video: https://youtu.be/NOIqly3sJmw
 - Código: https://github.com/utilapis/webstore/tree/feature/09-GuardaLaOrdenDeComprasDeTuTiendaOnline
+
+## 10 - Muestra diferentes categorías de productos en tu tienda online usando HTML, CSS y Javascript. | UtilAPIs
+- Video: https://youtu.be/ZjEAiSWXerQ
+- Código: https://github.com/utilapis/webstore/tree/feature/10-AgregaDiferentesCategoriasDeProductosATuTiendaOnline
