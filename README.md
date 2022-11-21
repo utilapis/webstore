@@ -17,6 +17,10 @@ Aprende a programar creando tu tienda online.
 - Video: https://youtu.be/il34MBQi7Uc
 - Código: https://github.com/utilapis/webstore/tree/feature/04-AgregaUnaBaseDeDatosATuTiendaOnline
 
+## 4.1 - Configura las credenciales de Google Sheet para tu tienda online. | UtilAPIs
+- Video: https://youtu.be/ZxSZ2HGIWcA
+- Código: https://github.com/utilapis/webstore/tree/feature/04.1-ConfiguraLasCredencialesDeGoogleSheetParaTuTiendaOnline
+
 ## 5 - Hostea tu tienda online usando Heroku. | UtilAPIs
 - Video: https://youtu.be/il34MBQi7Uc
 - Código: https://github.com/utilapis/webstore/tree/feature/05-HosteaTuTiendaOnline
@@ -44,3 +48,7 @@ Aprende a programar creando tu tienda online.
 ## 10 - Muestra diferentes categorías de productos en tu tienda online usando HTML, CSS y Javascript. | UtilAPIs
 - Video: https://youtu.be/ZjEAiSWXerQ
 - Código: https://github.com/utilapis/webstore/tree/feature/10-AgregaDiferentesCategoriasDeProductosATuTiendaOnline
+
+## 11 - Combina productos en la orden de compras de tu tienda online usando HTML, CSS y Javascript. | UtilAPIs
+- Video: https://youtu.be/O6FijCHyIpU
+- Código: https://github.com/utilapis/webstore/tree/feature/11-CombinaProductosEnTuTiendaOnline
