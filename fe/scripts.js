@@ -1,7 +1,7 @@
 let productList = [];
-let carrito = [];
-let total = 0;
+
 let order = {
+  total: 0,
   items: [],
 };
 
@@ -9,12 +9,23 @@ function add(productId, price) {
   const product = productList.find((p) => p.id === productId);
   product.stock--;
 
-  order.items.push(productList.find((p) => p.id === productId));
+  const productInOrder = order.items.find((p) => p.id === productId);
+  if (productInOrder) {
+    productInOrder.quantity = productInOrder.quantity + 1;
+  }
+  else {
+    order.items.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    });
+  }
 
   console.log(productId, price);
-  carrito.push(productId);
-  total = total + price;
-  document.getElementById("checkout").innerHTML = `Carrito $${total}`;
+
+  order.total = order.total + price;
+  document.getElementById("checkout").innerHTML = `Carrito $${order.total}`;
   displayProducts();
 }
 
@@ -22,7 +33,7 @@ async function showOrder() {
   document.getElementById("all-products").style.display = "none";
   document.getElementById("order").style.display = "block";
 
-  document.getElementById("order-total").innerHTML = `$${total}`;
+  document.getElementById("order-total").innerHTML = `$${order.total}`;
 
   let productsHTML = `
     <tr>
@@ -32,9 +43,9 @@ async function showOrder() {
     </tr>`;
   order.items.forEach((p) => {
     productsHTML += `<tr>
-            <td>1</td>
+            <td>${p.quantity}</td>
             <td>${p.name}</td>
-            <td>$${p.price}</td>
+            <td>$${p.price * p.quantity}</td>
         </tr>`;
   });
   document.getElementById("order-table").innerHTML = productsHTML;
@@ -89,13 +100,12 @@ async function pay() {
     window.alert("Sin stock");
   }
 
-  carrito = [];
-  total = 0;
   order = {
+    total: 0,
     items: [],
   };
   //await fetchProducts();
-  document.getElementById("checkout").innerHTML = `Carrito $${total}`;
+  document.getElementById("checkout").innerHTML = `Carrito $${order.total}`;
 }
 
 //-----
