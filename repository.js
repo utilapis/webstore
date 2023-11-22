@@ -1,22 +1,11 @@
 const { google } = require("googleapis");
 
-const oAuth2Client = new google.auth.OAuth2(
-  "653250056256-ecdqbeehrajsppi4oagvinloqjkofbhd.apps.googleusercontent.com",
-  "IuqvFQQhCSHHyZfGoy6YTPV4",
-  "urn:ietf:wg:oauth:2.0:oob"
-);
-
-oAuth2Client.setCredentials({
-  access_token:
-    "ya29.a0AfH6SMCKBUmfIJeFel-DKhgwuln0IiuGEP67k-72-3w9gh2FONsjA9FU11SZ19ya1Y3KeM_mssBVJDZrd9OLVz8mmRPzGY0GA1e9wBkUP2Bw8f-aetkIJP-sW4KzWLLW7Lxcz4dg8GODqGFmooICDBIeywxjI--bjRhTdLViTVM",
-  refresh_token:
-    "1//0go3CKc26E0KWCgYIARAAGBASNwF-L9Ir4kXUigSfieh7fOaGYM6VN3Ag7GjhxzXkDSUWkx4M-z4-mXGH8NalJWV7JqYFkjxiaKo",
-  scope: "https://www.googleapis.com/auth/spreadsheets",
-  token_type: "Bearer",
-  expiry_date: 1608879811848,
+const auth = new google.auth.GoogleAuth({
+  keyFile: './your-secret-key.json',
+  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
-const sheets = google.sheets({ version: "v4", auth: oAuth2Client });
+const sheets = google.sheets({ version: "v4", auth: auth });
 
 async function read() {
   const response = await sheets.spreadsheets.values.get({
