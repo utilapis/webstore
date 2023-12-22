@@ -4,10 +4,10 @@ const mercadopago = require("mercadopago");
 const app = express();
 const port = process.env.PORT || 3000;
 
-mercadopago.configure({
-  access_token:
-    "TEST-8840939573547467-020707-248077b0607d89f9d2b67ee11a4f9e27-705632138",
-});
+const client = new mercadopago.MercadoPagoConfig({ accessToken: 'TEST-8840939573547467-020707-248077b0607d89f9d2b67ee11a4f9e27-705632138', options: { timeout: 5000 } });
+const preferenceClient = new mercadopago.Preference(client);
+const paymentClient = new mercadopago.Payment(client);
+const merchantOrderClient = new mercadopago.MerchantOrder(client);
 
 app.use(express.json());
 
@@ -48,8 +48,8 @@ app.post("/api/pay", async (req, res) => {
   if (error) {
     res.send("Sin stock").statusCode(400);
   } else {
-    const response = await mercadopago.preferences.create(preference);
-    const preferenceId = response.body.id;
+    const response = await preferenceClient.create({ body: preference });
+    const preferenceId = response.id;
     await repository.write(productsCopy);
     order.date = new Date().toISOString();
     order.preferenceId = preferenceId;
@@ -62,10 +62,10 @@ app.post("/api/pay", async (req, res) => {
 });
 
 app.get("/feedback", async (req, res) => {
-  const payment = await mercadopago.payment.findById(req.query.payment_id);
-  const merchantOrder = await mercadopago.merchant_orders.findById(payment.body.order.id);
-  const preferenceId = merchantOrder.body.preference_id;
-  const status = payment.body.status;
+  const payment = await paymentClient.get({ id: req.query.payment_id });
+  const merchantOrder = await merchantOrderClient.get({ merchantOrderId: payment.order.id });
+  const preferenceId = merchantOrder.preference_id;
+  const status = payment.status;
   await repository.updateOrderByPreferenceId(preferenceId, status);
 
   res.sendFile(require.resolve("./fe/index.html"));
