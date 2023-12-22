@@ -12,6 +12,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "googleapis": "^66.0.0",
-    "mercadopago": "^1.5.8"
+    "mercadopago": "^2.0.6"
   }
 }

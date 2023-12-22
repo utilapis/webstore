@@ -1,3 +1,7 @@
+const mercadopago = new MercadoPago('TEST-c6353c13-c841-473d-8dd6-bf56114341c3', {
+  locale: 'es-AR' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+});
+
 let productList = [];
 
 let order = {
@@ -75,17 +79,26 @@ async function pay() {
       })
     ).json();
 
-    var script = document.createElement("script");
-
-    // The source domain must be completed according to the site for which you are integrating.
-    // For example: for Argentina ".com.ar" or for Brazil ".com.br".
-    script.src =
-      "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-    script.type = "text/javascript";
-    script.dataset.preferenceId = preference.preferenceId;
-    script.setAttribute("data-button-label", "Pagar con Mercado Pago");
+    const bricksBuilder = mercadopago.bricks();
     document.getElementById("order-actions").innerHTML = "";
-    document.querySelector("#order-actions").appendChild(script);
+
+    const renderComponent = async (bricksBuilder) => {
+      if (window.checkoutButton) window.checkoutButton.unmount();
+      await bricksBuilder.create(
+        'wallet',
+        'order-actions', // class/id where the payment button will be displayed
+        {
+          initialization: {
+            preferenceId: preference.preferenceId
+          },
+          callbacks: {
+            onError: (error) => console.error(error),
+            onReady: () => {}
+          }
+        }
+      );
+    };
+    window.checkoutButton =  renderComponent(bricksBuilder);
 
     document.getElementById("name").disabled = true;
     document.getElementById("email").disabled = true;

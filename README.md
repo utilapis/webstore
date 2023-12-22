@@ -53,3 +53,6 @@ Aprende a programar creando tu tienda online.
 - Video: https://youtu.be/O6FijCHyIpU
 - Código: https://github.com/utilapis/webstore/tree/feature/11-CombinaProductosEnTuTiendaOnline
 
+## 12 - Actualiza la versión de Mercado Pago en tu tienda online. | UtilAPIs
+- Video: https://youtu.be/VeHnjK2DfqU
+- Código: https://github.com/utilapis/webstore/tree/feature/12-ActualizaDependenciaDeMercadoPagoEnTuTiendaOnline
